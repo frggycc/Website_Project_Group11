@@ -29,7 +29,9 @@ def init_db():
                 ("000001", "Checkered Overalls", "Women", "Clothing", 39.99, "checker_overalls.jpg", "Red, Black"),
                 ("000002", "Vest Dress", "Women", "Clothing", 54.99, "vest_dress.jpg", "Brown"),
                 ("000003", "Athletic Crew T-Shirt", "Men", "Clothing", 19.99, "athletic_crew_tshirt.jpg", "Navy"),
-                ("000004", "Patriotic Loose Shirt", "Men", "Clothing", 22.99, "patriotic_loose_shirt.jpg", "Blue")
+                ("000004", "Patriotic Loose Shirt", "Men", "Clothing", 21.99, "patriotic_loose_shirt.jpg", "Blue"),
+                ("000005", "Fit Men T-Shirt", "CLothing", "Clothing", 19.99, "Fit_men_T-shirt.webp", "Cherry Red")
+               
             ]
             cur.executemany("INSERT INTO items (id, name, category, subcategory, price, image, color) VALUES (?, ?, ?, ?, ?, ?, ?)", sample_items)
         
