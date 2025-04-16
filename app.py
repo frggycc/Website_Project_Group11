@@ -66,6 +66,10 @@ def men_clothing():
         items = cur.fetchall()
     return render_template("men_clothing.html", items=items)
 
+@app.route('/shopping-cart')
+def shopping_cart():
+    return render_template("shopping_cart.html")
+
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
         init_db()
