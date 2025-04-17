@@ -3,6 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
+app.secret_key = "group_11"
 
 ''' DATABASE '''
 # Set up database
@@ -66,13 +67,35 @@ def men_clothing():
         items = cur.fetchall()
     return render_template("men_clothing.html", items=items)
 
-@app.route('/shopping-cart')
-def shopping_cart():
-    return render_template("shopping_cart.html")
-
+# Creating a list for user ession that holds item id and quantity
 @app.route('/add_to_cart', methods=["POST"])
 def add_to_cart():
+    item_id = request.form['item_id']
+
+    # Create cart or update current
+    if 'shopping_cart' not in session:
+        session['shopping_cart'] = []
+    
+    # Increment item in cart if exists; Otherwise, add it to the cart
+    for item in session['shopping_cart']:
+        if item['id'] == item_id:
+            item['quantity'] += 1
+            break
+    else:
+        session['shopping_cart'].append({'id': item_id, 'quantity':1})
+
+    session.modified = True
+
     return redirect(request.referrer or url_for('home'))
+
+@app.route('/shopping-cart')
+def shopping_cart():
+    cart_items = []
+    if 'shopping_cart' in session and session['shopping_cart']:
+        for item in session['shopping_cart']:
+            cart_items.append(item)
+
+    return render_template("shopping_cart.html", cart_items=cart_items)
 
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
