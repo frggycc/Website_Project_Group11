@@ -101,22 +101,29 @@ nav a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    padding: 20px;
 }
 /* Background box per item for readability */
 .item {
     border: .2em solid #ddd;
     padding: 10px;
-    width: 200px;
+    width: 220px;
     text-align: center;
+    height: 420px;
+    flex-direction: column;
+    display: flex;
+    
 }
 /* Fix overblown images */ 
 /* Made tweaks to ensure the added images don't overlap*/ 
 .item img { 
     max-width: 100%; 
-    height: auto; 
+    max-height: 200px; 
     object-fit: contain; 
     display: block; 
     margin: 0 auto 10px auto;
+    flex-shrink: 0;
  }
 
 /**************************************************************************/
