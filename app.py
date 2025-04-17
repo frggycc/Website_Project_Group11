@@ -31,10 +31,10 @@ def init_db():
                 ("000003", "Athletic Crew T-Shirt", "Men", "Clothing", 19.99, "athletic_crew_tshirt.jpg", "Navy"),
                 ("000004", "Patriotic Loose Shirt", "Men", "Clothing", 21.99, "patriotic_loose_shirt.jpg", "Blue"),
                 ("000005", "Fit Men T-Shirt", "Men", "Clothing", 19.99, "Fit_men_T-shirt.webp", "Cherry Red"),
-                ("000006", "S-Divine Athletic T-Shirt", "Men", "Clothing", 19.99, "S-Divine Athletic T-Shirt.webp", "Black, Grey"),
+                ("000006", "Divine Athletic Shirt", "Men", "Clothing", 19.99, "S-Divine Athletic T-Shirt.webp", "Black, Grey"),
                 ("000007", "Sweatpants", "Men", "Clothing", 55.99, "Men_Grey_Sweats.webp", "Grey"),
                 ("000008", "String Joggers", "Men", "Clothing", 53.99, "Men_Black_Joggers.jpeg", "Black"),
-                ("000009", "Athletic Running Shoes Air", "Men", "Clothing", 79.99, "Athletic_Running_Shoes_Air.jpeg", "Black"),
+                ("000009", "Athletic Running Shoes", "Men", "Clothing", 79.99, "Athletic_Running_Shoes_Air.jpeg", "Black"),
                 ("000010", "Golf Shoes High", "Men", "Clothing", 190.99, "Golf_Shoes_High_Men.webp", "Black, White, Gold"),
                 ("000011", "Athletic Zipper Jacket", "Women", "Clothing", 39.99, ".jpg,", "Color"),
                 ("000012", "Long Sleeve", "Women", "Clothing", 19.99, ".jpg", "Color"),
@@ -59,7 +59,6 @@ we will create a path --> "@app.route('/women/women-shoes')" where "/women/women
 
 Additionally, this is where we can manipulate our table based on the page the user is currently in. 
 '''
-#test
 
 @app.route('/')
 def home():
