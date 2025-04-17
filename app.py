@@ -91,11 +91,27 @@ def add_to_cart():
 @app.route('/shopping-cart')
 def shopping_cart():
     cart_items = []
+    total_price = 0.0
     if 'shopping_cart' in session and session['shopping_cart']:
-        for item in session['shopping_cart']:
-            cart_items.append(item)
+        with sqlite3.connect(DB_PATH) as con:
+            cur = con.cursor()
+            for cart_item in session['shopping_cart']:
+                cur.execute("SELECT * FROM items WHERE id = ?", (cart_item['id'],))
+                item = cur.fetchone()
+                if item:
+                    cart_items.append({
+                        'id': item[0],
+                        'name': item[1],
+                        'category': item[2],
+                        'subcategory': item[3],
+                        'price': item[4],
+                        'image': item[5],
+                        'color': item[6],
+                        'quantity': cart_item['quantity']
+                    })
+                    total_price += item[4] * cart_item['quantity']
 
-    return render_template("shopping_cart.html", cart_items=cart_items)
+    return render_template("shopping_cart.html", cart_items=cart_items, total_price=total_price)
 
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):

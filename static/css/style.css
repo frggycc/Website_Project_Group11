@@ -100,7 +100,7 @@ nav a:hover {
 
 .cart-icon {
     width: 24px;
-    vertical-align: middle;
+    height: auto;
 }
 
 .add-to-cart {
@@ -112,6 +112,58 @@ nav a:hover {
     cursor: pointer;
     margin-top: 10px;
 }
+
+/**** SHOPPING CART PAGE ****/
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th, .cart-table td {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border: 1px solid #999;
+    text-align: left;
+}
+
+/* Make sure that cart images are centered in column */
+.cart-table td:first-child{
+    text-align: center;
+}
+
+.cart-image {
+    width: auto;
+    height: 50px;
+    object-fit: contain;
+}
+
+table {
+    width: 90%;
+    align-self: center;
+    margin-top: 20px;
+}
+
+th, td {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    text-align: left;
+}
+
+.pay-button {
+    font-family: 'Poppins', sans-serif;
+    text-align: right;
+    background-color: #2a7200;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    cursor: pointer;
+    float: right;
+}
+
+
 /**************************************************************************/
 
 /* Have each "box" next to each other; Wrap */
