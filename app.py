@@ -36,7 +36,7 @@ def init_db():
                 ("000008", "String Joggers", "Men", "Clothing", 53.99, "Men_Black_Joggers.jpeg", "Black"),
                 ("000009", "Athletic Running Shoes", "Men", "Clothing", 79.99, "Athletic_Running_Shoes_Air.jpeg", "Black"),
                 ("000010", "Golf Shoes High", "Men", "Clothing", 190.99, "Golf_Shoes_High_Men.webp", "Black, White, Gold"),
-                ("000011", "Athletic Zipper Jacket", "Women", "Clothing", 39.99, "Athletic_Zipper _Jacket.jpeg,", "Green"),
+                ("000011", "Athletic Zipper Jacket", "Women", "Clothing", 39.99, "green_jacket_women.webp", "Green"),
                 ("000012", "Long Sleeve", "Women", "Clothing", 19.99, "long_sleeve_women.jpg", "Blue"),
                 ("000013", "Leggings", "Women", "Clothing", 39.99, "leggings_women.webp", "Black"),
                 ("000014", "Drawstring Pants", "Women", "Clothing", 49.99, "drawstring_pants_women.jpg", "Grey"),
