@@ -109,11 +109,15 @@ nav a:hover {
     width: 200px;
     text-align: center;
 }
-/* Fix overblown images */
-.item img {
-    max-height: 250px;
-    margin: 10px 25px;
-}
+/* Fix overblown images */ 
+/* Made tweaks to ensure the added images don't overlap*/ 
+.item img { 
+    max-width: 100%; 
+    height: auto; 
+    object-fit: contain; 
+    display: block; 
+    margin: 0 auto 10px auto;
+ }
 
 /**************************************************************************/
 
