@@ -59,6 +59,7 @@ we will create a path --> "@app.route('/women/women-shoes')" where "/women/women
 
 Additionally, this is where we can manipulate our table based on the page the user is currently in. 
 '''
+#test
 
 @app.route('/')
 def home():
