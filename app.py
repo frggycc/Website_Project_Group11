@@ -70,6 +70,10 @@ def men_clothing():
 def shopping_cart():
     return render_template("shopping_cart.html")
 
+@app.route('/add_to_cart', methods=["POST"])
+def add_to_cart():
+    return redirect(request.referrer or url_for('home'))
+
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
         init_db()
