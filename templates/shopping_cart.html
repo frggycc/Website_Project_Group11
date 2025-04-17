@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Shopping Cart</h2>
+    {% if cart_items %}
+        {% for item in cart_items %}
+            <p>Here's an item. ID: {{ item['id'] }} Quantity: {{ item['quantity'] }}</p>
+        {% endfor %}
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
 {% endblock %}
