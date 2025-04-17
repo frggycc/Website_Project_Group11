@@ -36,12 +36,12 @@ def init_db():
                 ("000008", "String Joggers", "Men", "Clothing", 53.99, "Men_Black_Joggers.jpeg", "Black"),
                 ("000009", "Athletic Running Shoes", "Men", "Clothing", 79.99, "Athletic_Running_Shoes_Air.jpeg", "Black"),
                 ("000010", "Golf Shoes High", "Men", "Clothing", 190.99, "Golf_Shoes_High_Men.webp", "Black, White, Gold"),
-                ("000011", "Athletic Zipper Jacket", "Women", "Clothing", 39.99, ".jpg,", "Color"),
-                ("000012", "Long Sleeve", "Women", "Clothing", 19.99, ".jpg", "Color"),
-                ("000013", "Pants", "Women", "Clothing", 39.99, ".jpg", "Color"),
-                ("000014", "Pants", "Women", "Clothing", 49.99, ".jpg", "Color"),
-                ("000015", "Shoes", "Women", "Clothing", 89.99, ".jpg", "Color"),
-                ("000016", "Shoes", "Women", "Clothing", 149.99, ".jpg", "Color")
+                ("000011", "Athletic Zipper Jacket", "Women", "Clothing", 39.99, "Athletic_Zipper _Jacket.jpeg,", "Green"),
+                ("000012", "Long Sleeve", "Women", "Clothing", 19.99, "long_sleeve_women.jpg", "Blue"),
+                ("000013", "Leggings", "Women", "Clothing", 39.99, "leggings_women.webp", "Black"),
+                ("000014", "Drawstring Pants", "Women", "Clothing", 49.99, "drawstring_pants_women.jpg", "Grey"),
+                ("000015", "Relay Sneakers", "Women", "Clothing", 89.99, "white_shoes_women.webp", "White, Black"),
+                ("000016", "Running Shoes", "Women", "Clothing", 149.99, "running_shoes_women.jpg", "Purple, White")
     
             ]
             cur.executemany("INSERT INTO items (id, name, category, subcategory, price, image, color) VALUES (?, ?, ?, ?, ?, ?, ?)", sample_items)
