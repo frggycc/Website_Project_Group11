@@ -12,6 +12,7 @@
 
                 <!-- Add add_to_cart section to items -->
                 <form method="POST" action="{{ url_for('add_to_cart') }}">
+                    <input type="hidden" name="item_id" value="{{ item[0] }}">
                     <button type="submit" class="add-to-cart">Add to Cart</button>
                 </form>
             </div>
