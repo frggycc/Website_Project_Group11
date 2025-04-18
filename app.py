@@ -35,14 +35,14 @@ def init_db():
                 ("000006", "Divine Athletic Shirt", "Men", "Clothing", 19.99, "S-Divine Athletic T-Shirt.webp", "Black, Grey"),
                 ("000007", "Sweatpants", "Men", "Clothing", 55.99, "Men_Grey_Sweats.webp", "Grey"),
                 ("000008", "String Joggers", "Men", "Clothing", 53.99, "Men_Black_Joggers.jpeg", "Black"),
-                ("000009", "Athletic Running Shoes", "Men", "Clothing", 79.99, "Athletic_Running_Shoes_Air.jpeg", "Black"),
-                ("000010", "Golf Shoes High", "Men", "Clothing", 190.99, "Golf_Shoes_High_Men.webp", "Black, White, Gold"),
+                ("000009", "Athletic Running Shoes", "Men", "Shoes", 79.99, "Athletic_Running_Shoes_Air.jpeg", "Black"),
+                ("000010", "Golf Shoes High", "Men", "Shoes", 190.99, "Golf_Shoes_High_Men.webp", "Black, White, Gold"),
                 ("000011", "Athletic Zipper Jacket", "Women", "Clothing", 39.99, "green_jacket_women.webp", "Green"),
                 ("000012", "Long Sleeve", "Women", "Clothing", 19.99, "long_sleeve_women.jpg", "Blue"),
                 ("000013", "Leggings", "Women", "Clothing", 39.99, "leggings_women.webp", "Black"),
                 ("000014", "Drawstring Pants", "Women", "Clothing", 49.99, "drawstring_pants_women.jpg", "Grey"),
-                ("000015", "Relay Sneakers", "Women", "Clothing", 89.99, "white_shoes_women.webp", "White, Black"),
-                ("000016", "Running Shoes", "Women", "Clothing", 149.99, "running_shoes_women.jpg", "Purple, White")
+                ("000015", "Relay Sneakers", "Women", "Shoes", 89.99, "white_shoes_women.webp", "White, Black"),
+                ("000016", "Running Shoes", "Women", "Shoes", 149.99, "running_shoes_women.jpg", "Purple, White")
             ]
             cur.executemany("INSERT INTO items (id, name, category, subcategory, price, image, color) VALUES (?, ?, ?, ?, ?, ?, ?)", sample_items)
         
@@ -72,6 +72,14 @@ def women_clothing():
         items = cur.fetchall()
     return render_template("women_clothing.html", items=items)
 
+@app.route('/women/shoes')
+def women_shoes():
+    with sqlite3.connect(DB_PATH) as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM items WHERE category = 'Women' AND subcategory = 'Shoes'")
+        items = cur.fetchall()
+    return render_template("women_shoes.html", items=items)
+
 @app.route('/men/clothing')
 def men_clothing():
     with sqlite3.connect(DB_PATH) as con:
@@ -79,6 +87,14 @@ def men_clothing():
         cur.execute("SELECT * FROM items WHERE category = 'Men' AND subcategory = 'Clothing'")
         items = cur.fetchall()
     return render_template("men_clothing.html", items=items)
+
+@app.route('/men/shoes')
+def men_shoes():
+    with sqlite3.connect(DB_PATH) as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM items WHERE category = 'Men' AND subcategory = 'Shoes'")
+        items = cur.fetchall()
+    return render_template("men_shoes.html", items=items)
 
 # Creating a list for user ession that holds item id and quantity
 @app.route('/add_to_cart', methods=["POST"])

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Women's Shoes</h2>
+<!-- Referencing items filtered out of 'items' table in 'app.py'-->
+    <div class="items"> 
+        {% for item in items %}
+            <div class="item">
+                <img src="{{ url_for('static', filename='images/' + item[5]) }}" alt="{{ item[1] }}">
+                <h3>{{ item[1] }}</h3>
+                <p>${{ "%.2f" % item[4] }}</p>
+                <p class="colors">Colors: {{ item[6] }}</p>
+
+                <!-- Add add_to_cart section to items -->
+                <form method="POST" action="{{ url_for('add_to_cart') }}">
+                    <input type="hidden" name="item_id" value="{{ item[0] }}">
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </form>
+            </div>
+        {% else %}
+            <p>No items found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
