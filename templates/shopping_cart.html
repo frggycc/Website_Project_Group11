@@ -15,13 +15,13 @@
                 <tr>
                     <td><img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}" class="cart-image"></td>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.price }}</td>
+                    <td>${{ item.price }}</td>
                     <td>{{ item.quantity }}</td>
-                    <td>{{ "%.2f" % (item.price * item.quantity) }}</td>
+                    <td>${{ "%.2f" % (item.price * item.quantity) }}</td>
                 </tr>
             {% endfor %}
             <tr>
-                <td colspan="4" style="text-align: right;">Total:</td>
+                <td colspan="4" style="text-align: right;"><strong>Total:</strong></td>
                 <td>${{ "%.2f" % total_price }}</td>
             </tr>
         </table>
