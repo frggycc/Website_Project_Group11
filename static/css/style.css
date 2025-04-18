@@ -99,6 +99,7 @@ nav a:hover {
 /* Have each "box" next to each other; Wrap */
 .items {
     display: flex;
+    margin-bottom: 40px;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
