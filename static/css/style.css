@@ -27,13 +27,13 @@ main {
 }
 
 h2 {
-    font-family: 'Bebas Neue', sans-serif; 
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2em;
     font-weight: 700;
 }
 
 h3 {
-    font-family: 'Poppins', sans-serif; 
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
 }
 
@@ -136,4 +136,71 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+/**************************************************************************/
+
+.cart-icon {
+    width: 24px;
+    height: auto;
+}
+
+.add-to-cart {
+    font-family: 'Poppins', sans-serif;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/**** SHOPPING CART PAGE ****/
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th, .cart-table td {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border: 1px solid #999;
+    text-align: left;
+}
+
+/* Make sure that cart images are centered in column */
+.cart-table td:first-child{
+    text-align: center;
+}
+
+.cart-image {
+    width: auto;
+    height: 50px;
+    object-fit: contain;
+}
+
+table {
+    width: 90%;
+    align-self: center;
+    margin-top: 20px;
+}
+
+th, td {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    text-align: left;
+}
+
+.pay-button {
+    font-family: 'Poppins', sans-serif;
+    text-align: right;
+    background-color: #2a7200;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    cursor: pointer;
+    float: right;
 }

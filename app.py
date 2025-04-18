@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, request, session, redirect
 import sqlite3
 import os
 
 app = Flask(__name__)
+app.secret_key = "group_11"
 
 ''' DATABASE '''
 # Set up database
@@ -42,7 +43,6 @@ def init_db():
                 ("000014", "Drawstring Pants", "Women", "Clothing", 49.99, "drawstring_pants_women.jpg", "Grey"),
                 ("000015", "Relay Sneakers", "Women", "Clothing", 89.99, "white_shoes_women.webp", "White, Black"),
                 ("000016", "Running Shoes", "Women", "Clothing", 149.99, "running_shoes_women.jpg", "Purple, White")
-    
             ]
             cur.executemany("INSERT INTO items (id, name, category, subcategory, price, image, color) VALUES (?, ?, ?, ?, ?, ?, ?)", sample_items)
         
@@ -79,6 +79,52 @@ def men_clothing():
         cur.execute("SELECT * FROM items WHERE category = 'Men' AND subcategory = 'Clothing'")
         items = cur.fetchall()
     return render_template("men_clothing.html", items=items)
+
+# Creating a list for user ession that holds item id and quantity
+@app.route('/add_to_cart', methods=["POST"])
+def add_to_cart():
+    item_id = request.form['item_id']
+
+    # Create cart or update current
+    if 'shopping_cart' not in session:
+        session['shopping_cart'] = []
+    
+    # Increment item in cart if exists; Otherwise, add it to the cart
+    for item in session['shopping_cart']:
+        if item['id'] == item_id:
+            item['quantity'] += 1
+            break
+    else:
+        session['shopping_cart'].append({'id': item_id, 'quantity':1})
+
+    session.modified = True
+
+    return redirect(request.referrer or url_for('home'))
+
+@app.route('/shopping-cart')
+def shopping_cart():
+    cart_items = []
+    total_price = 0.0
+    if 'shopping_cart' in session and session['shopping_cart']:
+        with sqlite3.connect(DB_PATH) as con:
+            cur = con.cursor()
+            for cart_item in session['shopping_cart']:
+                cur.execute("SELECT * FROM items WHERE id = ?", (cart_item['id'],))
+                item = cur.fetchone()
+                if item:
+                    cart_items.append({
+                        'id': item[0],
+                        'name': item[1],
+                        'category': item[2],
+                        'subcategory': item[3],
+                        'price': item[4],
+                        'image': item[5],
+                        'color': item[6],
+                        'quantity': cart_item['quantity']
+                    })
+                    total_price += item[4] * cart_item['quantity']
+
+    return render_template("shopping_cart.html", cart_items=cart_items, total_price=total_price)
 
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
