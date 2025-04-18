@@ -92,6 +92,7 @@ nav a:hover {
 
 .dropdown:hover .dropdown-content {
     display: block;
+    margin-bottom: 10px;
 }
 
 /**************************************************************************/
@@ -111,11 +112,16 @@ nav a:hover {
     padding: 10px;
     width: 220px;
     text-align: center;
-    height: 420px;
+    height: 400px;
     flex-direction: column;
     display: flex;
-    
 }
+
+.item p {
+    font-family: 'Poppins', sans-serif;
+    margin: 5px 0px;
+}
+
 /* Fix overblown images */ 
 /* Made tweaks to ensure the added images don't overlap*/ 
 .item img { 
@@ -141,11 +147,14 @@ footer {
 
 /**************************************************************************/
 
+.cart-link {
+    display: inline-block;
+    margin: 0 10px;
+}
 .cart-icon {
     width: 24px;
     height: auto;
 }
-
 .add-to-cart {
     font-family: 'Poppins', sans-serif;
     background-color: #333;
