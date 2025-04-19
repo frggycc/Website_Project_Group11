@@ -145,6 +145,7 @@ def shopping_cart():
 @app.route("/", methods=["GET", "POST"])
 def index():
     search_query = request.args.get("search", "").lower()
+    print("Search Query:", search_query)
 
     with sqlite3.connect(DB_PATH) as con:
         cur = con.cursor()
@@ -161,7 +162,9 @@ def index():
             cur.execute("SELECT * FROM items")
 
         items = cur.fetchall()
-
+    print("Number of items found:", len(items))  # <-- Debug print
+    for item in items:
+        print(item)  # <-- Optional: print each item matched
     return render_template("index.html", items=items)
 
 if __name__ == "__main__":
@@ -169,3 +172,4 @@ if __name__ == "__main__":
         init_db()
 
     app.run(debug=True)
+
