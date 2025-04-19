@@ -47,10 +47,12 @@
 </html>
 
 <!-- Search Bar-->
-<form method="GET" action="/" class="search-bar">
+<form method="GET" action="/search-Bar" class="search-bar">
     <input type="text" name="search" placeholder="Search items..." value="{{ request.args.get('search', '') }}">
     <button type="submit">Search</button>
 </form>
+
+  
 
 {% if items %}
     <div class="items-grid">
