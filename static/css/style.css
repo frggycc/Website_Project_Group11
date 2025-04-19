@@ -214,3 +214,32 @@ th, td {
     cursor: pointer;
     float: right;
 }
+
+/******* Search Bar Page  ********/
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-bar input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 10px 16px;
+    border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #555;
+}
