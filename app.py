@@ -142,6 +142,28 @@ def shopping_cart():
 
     return render_template("shopping_cart.html", cart_items=cart_items, total_price=total_price)
 
+@app.route("/", methods=["GET", "POST"])
+def index():
+    search_query = request.args.get("search", "").lower()
+
+    with sqlite3.connect(DB_PATH) as con:
+        cur = con.cursor()
+
+        if search_query:
+            cur.execute("""
+                SELECT * FROM items 
+                WHERE LOWER(name) LIKE ?
+                OR LOWER(category) LIKE ?
+                OR LOWER(subcategory) LIKE ?
+                OR LOWER(color) LIKE ?
+            """, ['%' + search_query + '%'] * 4)
+        else:
+            cur.execute("SELECT * FROM items")
+
+        items = cur.fetchall()
+
+    return render_template("index.html", items=items)
+
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
         init_db()
