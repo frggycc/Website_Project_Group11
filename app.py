@@ -143,7 +143,7 @@ def shopping_cart():
     return render_template("shopping_cart.html", cart_items=cart_items, total_price=total_price)
 
 @app.route('/search-Bar', methods=["GET", "POST"])
-def index():
+def home():
     search_query = request.args.get("search", "").lower()
     print("Search Query:", search_query)
 
@@ -165,7 +165,7 @@ def index():
     print("Number of items found:", len(items))  # <-- Debug print
     for item in items:
         print(item)  # <-- Optional: print each item matched
-    return render_template("index.html", items=items)
+    return render_template("home.html", items=items)
 
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
