@@ -70,3 +70,31 @@
 {% else %}
     <p class="no-results">No results found for "{{ request.args.get('search', '') }}".</p>
 {% endif %}
+
+<table class="items-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Color</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>
+          <img src="{{ url_for('static', filename='images/' + item[5]) }}" alt="{{ item[1] }}" width="80" height="80">
+        </td>
+        <td>{{ item[1] }}</td>
+        <td>{{ item[2] }}</td>
+        <td>{{ item[3] }}</td>
+        <td>{{ item[6] }}</td>
+        <td>${{ "%.2f"|format(item[4]) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
