@@ -165,7 +165,7 @@ def search_bar():
     print("Number of items found:", len(items))  # <-- Debug print
     for item in items:
         print(item)  # <-- Optional: print each item matched
-    return render_template("home.html", items=items)
+    return render_template("base.html", items=items)
 
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
