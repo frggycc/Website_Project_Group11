@@ -142,7 +142,7 @@ def shopping_cart():
 
     return render_template("shopping_cart.html", cart_items=cart_items, total_price=total_price)
 
-@app.route('/search-Bar', methods=["GET", "POST"])
+@app.route('/search-bar', methods=["GET", "POST"])
 def search_bar():
     search_query = request.args.get("search", "").lower()
     print("Search Query:", search_query)
