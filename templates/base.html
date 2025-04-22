@@ -46,55 +46,44 @@
 </body>
 </html>
 
-<!-- Search Bar-->
-<form method="GET" action="/search-Bar" class="search-bar">
+<!-- Search Bar -->
+<form method="GET" action="/search-bar" class="search-bar">
     <input type="text" name="search" placeholder="Search items..." value="{{ request.args.get('search', '') }}">
     <button type="submit">Search</button>
 </form>
 
-  
+{% set search_query = request.args.get('search') %}
 
-{% if items %}
-    <div class="items-grid">
-        {% for item in items %}
-            <div class="item-card">
-                <img src="{{ url_for('static', filename='images/' + item[5]) }}" alt="{{ item[1] }}">
-                <h3>{{ item[1] }}</h3>
-                <p>Category: {{ item[2] }}</p>
-                <p>Subcategory: {{ item[3] }}</p>
-                <p>Color: {{ item[6] }}</p>
-                <p>${{ "%.2f"|format(item[4]) }}</p>
-            </div>
-        {% endfor %}
-    </div>
-{% else %}
-    <p class="no-results">No results found for "{{ request.args.get('search', '') }}".</p>
+{% if search_query %}
+    {% if items %}
+        <table class="items-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Color</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in items %}
+              <tr>
+                <td>
+                  <img src="{{ url_for('static', filename='images/' + item[5]) }}" alt="{{ item[1] }}" width="80" height="80">
+                </td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[6] }}</td>
+                <td>${{ "%.2f"|format(item[4]) }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-results">No results found for "{{ search_query }}".</p>
+    {% endif %}
 {% endif %}
 
-<table class="items-table">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Subcategory</th>
-        <th>Color</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in items %}
-      <tr>
-        <td>
-          <img src="{{ url_for('static', filename='images/' + item[5]) }}" alt="{{ item[1] }}" width="80" height="80">
-        </td>
-        <td>{{ item[1] }}</td>
-        <td>{{ item[2] }}</td>
-        <td>{{ item[3] }}</td>
-        <td>{{ item[6] }}</td>
-        <td>${{ "%.2f"|format(item[4]) }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  
