@@ -183,7 +183,31 @@ def admin_login():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    return render_template('admin.html')
+    # Keep unauthorized users out
+    if not session.get('admin'):
+        return redirect(url_for('admin_login'))
+    
+    # Possible improvements; Upload photo directly to the website
+    with sqlite3.connect(DB_PATH) as con:
+        cur = con.cursor()
+        if request.method == 'POST':
+            action = request.form.get('action')
+            if action == 'add':
+                cur.execute("SELECT id FROM items ORDER BY id DESC LIMIT 1")
+                last_id = cur.fetchone()
+                new_id = '000001' if not last_id else str(int(last_id[0]) + 1).zfill(6)
+                name = request.form['name']
+                category = request.form['category']
+                subcategory = request.form['subcategory']
+                price = float(request.form['price'])
+                image = request.form['image']
+                colors = request.form['colors']
+                cur.execute("INSERT INTO items (id, name, category, subcategory, price, image, colors) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                          (new_id, name, category, subcategory, price, image, colors))
+
+        cur.execute("SELECT * FROM items")
+        items = cur.fetchall() 
+    return render_template('admin.html', items=items)
 
 @app.route('/admin/logout')
 def admin_logout():
