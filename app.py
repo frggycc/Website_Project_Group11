@@ -185,6 +185,11 @@ def admin_login():
 def admin():
     return render_template('admin.html')
 
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('admin', None)
+    return redirect(url_for('home'))
+
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
         init_db()

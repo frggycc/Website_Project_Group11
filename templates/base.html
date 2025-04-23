@@ -29,11 +29,15 @@
                     <a href="{{ url_for('men_shoes') }}">Shoes</a>
                 </div>
             </div>
+            {% if session.admin %}
+                <a href="{{ url_for('admin') }}">Admin</a>
+                <a href="{{ url_for('admin_logout') }}">Logout</a>
+            {% endif %}
+
+
             <a href="{{ url_for('shopping_cart') }}" class="cart-link">
                 <img src="{{ url_for('static', filename='images/cart.png') }}" alt="Shopping Cart" class="cart-icon">
             </a>
-            
-<!-- Add way tp log into an admin session -->
         </nav>
     </header>
     <main>
