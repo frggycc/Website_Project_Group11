@@ -183,11 +183,9 @@ def admin_login():
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
-    # Keep unauthorized users out
     if not session.get('admin'):
         return redirect(url_for('admin_login'))
     
-    # Possible improvements; Upload photo directly to the website
     with sqlite3.connect(DB_PATH) as con:
         cur = con.cursor()
         if request.method == 'POST':
@@ -202,8 +200,22 @@ def admin():
                 price = float(request.form['price'])
                 image = request.form['image']
                 colors = request.form['colors']
-                cur.execute("INSERT INTO items (id, name, category, subcategory, price, image, colors) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                cur.execute("INSERT INTO items (id, name, category, subcategory, price, image, color) VALUES (?, ?, ?, ?, ?, ?, ?)",
                           (new_id, name, category, subcategory, price, image, colors))
+            elif action == 'edit':
+                item_id = request.form['id']
+                name = request.form['name']
+                category = request.form['category']
+                subcategory = request.form['subcategory']
+                price = float(request.form['price'])
+                image = request.form['image']
+                colors = request.form['colors']
+                cur.execute("UPDATE items SET name = ?, category = ?, subcategory = ?, price = ?, image = ?, color = ? WHERE id = ?",
+                          (name, category, subcategory, price, image, colors, item_id))
+            elif action == 'delete':
+                item_id = request.form['id']
+                cur.execute("DELETE FROM items WHERE id = ?", (item_id,))
+            con.commit()
 
         cur.execute("SELECT * FROM items")
         items = cur.fetchall() 

@@ -25,4 +25,54 @@
         <input type="text" id="colors" name="colors" placeholder="e.g., Blue,Green,Pink" required><br>
         <button type="submit">Add Item</button>
     </form>
+
+    <h3>Manage Items</h3>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Colors</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in items %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>${{ "%.2f" % item[4] }}</td>
+                <td>{{ item[5] }}</td>
+                <td>{{ item[6] }}</td>
+                <td>
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="action" value="edit">
+                        <input type="hidden" name="id" value="{{ item[0] }}">
+                        <input type="text" name="name" value="{{ item[1] }}" required>
+                        <select name="category" required>
+                            <option value="Women" {% if item[2] == 'Women' %}selected{% endif %}>Women</option>
+                            <option value="Men" {% if item[2] == 'Men' %}selected{% endif %}>Men</option>
+                        </select>
+                        <select name="subcategory" required>
+                            <option value="Clothing" {% if item[3] == 'Clothing' %}selected{% endif %}>Clothing</option>
+                            <option value="Shoes" {% if item[3] == 'Shoes' %}selected{% endif %}>Shoes</option>
+                            <option value="Accessories" {% if item[3] == 'Accessories' %}selected{% endif %}>Accessories</option>
+                        </select>
+                        <input type="number" name="price" value="{{ item[4] }}" step="0.01" required>
+                        <input type="text" name="image" value="{{ item[5] }}" required>
+                        <input type="text" name="colors" value="{{ item[6] }}" placeholder="e.g., Blue,Green,Pink" required>
+                        <button type="submit">Update</button>
+                    </form>
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="id" value="{{ item[0] }}">
+                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
