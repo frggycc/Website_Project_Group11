@@ -167,6 +167,24 @@ def search_bar():
         print(item)  # <-- Optional: print each item matched
     return render_template("base.html", items=items)
 
+''' ADMIN PAGES AND ROUTES '''
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        # If time permits, use encryption for password and username
+        if username == 'admin' and password == 'Group11':
+            session['admin'] = True
+            return redirect(url_for('admin'))
+        return render_template('login.html', error='Invalid credentials')
+    return render_template('login.html')
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    return render_template('admin.html')
+
 if __name__ == "__main__":
     if not os.path.exists(DB_PATH):
         init_db()
