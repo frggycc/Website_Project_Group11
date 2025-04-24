@@ -62,7 +62,17 @@ Additionally, this is where we can manipulate our table based on the page the us
 
 @app.route('/')
 def home():
-    return render_template("home.html")
+    with sqlite3.connect(DB_PATH) as con:
+        cur = con.cursor()
+
+        # Get some items to be featured
+        cur.execute("SELECT * FROM items WHERE category = 'Women' LIMIT 2")
+        women_items = cur.fetchall()
+        cur.execute("SELECT * FROM items WHERE category = 'Men' LIMIT 2")
+        men_items = cur.fetchall()
+
+        featured_items = women_items + men_items
+    return render_template("home.html", featured_items=featured_items)
 
 @app.route('/women/clothing')
 def women_clothing():

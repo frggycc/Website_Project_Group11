@@ -1,5 +1,36 @@
+<!-- Variables: featured_items: Two random items from each the women's and men section -->
 {% extends "base.html" %}
 {% block content %}
-    <h2>Welcome to some e-commerce website</h2>
-    <p>Take a look at our selection of clothing.</p>
+    <section class="home">
+        <h2>Welcome to Athletica Sportswear</h2>
+        <p>Discover the latest trends in sportswear - For the fearless!</p>
+        <div class="home-buttons">
+            <a href="{{ url_for('women_clothing') }}" class="cta-button">Shop Women's</a>
+            <a href="{{ url_for('men_clothing') }}" class="cta-button">Shop Men's</a>
+        </div>
+    </section>
+    <section class="featured">
+        <h2>Featured Items</h2>
+
+        <!-- Copy/Pasted from subcategory pages -->
+        <div class="items">
+            {% for item in featured_items %}
+                <div class="item">
+                    <img src="{{ url_for('static', filename='images/' + item[5]) }}" alt="{{ item[1] }}">
+                    <h3>{{ item[1] }}</h3>
+                    <p>${{ "%.2f" % item[4] }}</p>
+                    <p class="colors">Colors: {{ item[6] }}</p>
+
+                <!-- Add add_to_cart section to items -->
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="item_id" value="{{ item[0] }}">
+                        <button type="submit" class="add-to-cart">Add to Cart</button>
+                    </form>
+                </div>
+                
+            {% else %}
+                <p>No featured items available.</p>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
