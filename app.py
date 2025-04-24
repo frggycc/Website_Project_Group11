@@ -90,6 +90,14 @@ def women_shoes():
         items = cur.fetchall()
     return render_template("women_shoes.html", items=items)
 
+@app.route('/women/accessories')
+def women_accessories():
+    with sqlite3.connect(DB_PATH) as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM items WHERE category = 'Women' AND subcategory = 'Accessories'")
+        items = cur.fetchall()
+    return render_template("women_accessories.html", items=items)
+
 @app.route('/men/clothing')
 def men_clothing():
     with sqlite3.connect(DB_PATH) as con:
@@ -105,6 +113,14 @@ def men_shoes():
         cur.execute("SELECT * FROM items WHERE category = 'Men' AND subcategory = 'Shoes'")
         items = cur.fetchall()
     return render_template("men_shoes.html", items=items)
+
+@app.route('/men/accessories')
+def men_accessories():
+    with sqlite3.connect(DB_PATH) as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM items WHERE category = 'Men' AND subcategory = 'Accessories'")
+        items = cur.fetchall()
+    return render_template("men_accessories.html", items=items)
 
 # Creating a list for user ession that holds item id and quantity
 @app.route('/add_to_cart', methods=["POST"])
