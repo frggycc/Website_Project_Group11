@@ -22,6 +22,15 @@ header h1 {
     margin: 0;
 }
 
+.title-link {
+    font-family: 'Bebas Neue', sans-serif;
+    font-family: 2.5em;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    text-decoration: none;
+}
+
 main {
     padding: 20px;
 }
@@ -215,6 +224,12 @@ th, td {
     font-family: 'Poppins', sans-serif;
     padding: 10px;
     text-align: left;
+    border: 1px solid #999;
+}
+
+th {
+    background-color: #333;
+    color: white;
 }
 
 .pay-button {
