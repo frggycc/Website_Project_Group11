@@ -306,3 +306,12 @@ th, td {
 .cta-button:hover {
     background-color: #555;
 }
+
+.featured {
+    margin: 40px 0;
+}
+
+.featured h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
