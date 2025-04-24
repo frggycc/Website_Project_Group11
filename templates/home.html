@@ -1,5 +1,22 @@
+<!-- Variables: featured_items: Two random items from each the women's and men section -->
 {% extends "base.html" %}
 {% block content %}
-    <h2>Welcome to some e-commerce website</h2>
-    <p>Take a look at our selection of clothing.</p>
+    <section class="home">
+        <h2>Welcome to Athletica Sportswear</h2>
+        <p>Discover the latest trends in sportswear - For the fearless!</p>
+        <div class="home-buttons">
+            <a href="{{ url_for('women_clothing') }}" class="cta-button">Shop Women's</a>
+            <a href="{{ url_for('men_clothing') }}" class="cta-button">Shop Men's</a>
+        </div>
+    </section>
+    <section class="featured">
+        <h2>Featured Items</h2>
+        <div class="items">
+            {% for item in featured_items %}
+                <h3>{{ item[1] }}</h3>
+            {% else %}
+                <p>No featured items available.</p>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}
