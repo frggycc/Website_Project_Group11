@@ -91,23 +91,14 @@ http://127.0.0.1:5000/
 
 ### Functional Requirements
 
-- User Account Management
-  - Users should be able to login and create an account
-
-- Shopping Cart
-  - Users can add items to their cart, modify quantities, and proceed to checkout.
-
-- Product Catalog Management
-  - Products can be added, updated, or deleted by an admin.
-  - Each product includes a price, description, and image.
-
-- Checkout and Orders
-  - Users can place orders.
-  - Orders are stored with user details.
-
-- Search Feature
-  - Users can search for products using keywords.
-  - Search returns relevant results from product name, section, and subsection
+| ID | Identity | Description |
+| ----------- | ----------- | ------|
+| FR_0 | Homepage | Users will be able to access a homepage when opening a link to the website. It will be the access point to mulitple features. |
+| FR_1 | Searchbar | Users can search for products using keywords. Search returns results from product name, section, and subsection. |
+| FR_2 | Shopping Cart | Users can add items to their cart, modify quantities, and proceed to checkout. |
+| FR_3 | User Account Management | Users are able to login and create an account |
+| FR_4 | Product Catalog Management | Products can be added, updated, or deleted by an admin. Each product includes a price, description, and image. |
+| FR_5 | Checkout and Orders | Users can place orders. Orders are stored with user details. |
 
 ---
 
