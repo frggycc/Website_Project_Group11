@@ -101,6 +101,8 @@ http://127.0.0.1:5000/
 | FR_5 | Checkout and Orders | Users can place orders. Orders are stored with user details. |
 | FR_6 | Men | Users will be able to search for a variety of men's products. |
 | FR_7 | Women | Users will be able to search for a variety of women's products. |
+| FR_8 | Product Page | Based on what category the user chooses, they will be able to scroll through a variety of products in that given category. |
+| FR_9 | Add To Cart | Users will be able to add a product to their shopping cart. |
 
 ---
 
