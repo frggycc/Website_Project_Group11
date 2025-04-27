@@ -99,21 +99,17 @@ http://127.0.0.1:5000/
 | FR_3 | User Account Management | Users are able to login and create an account |
 | FR_4 | Product Catalog Management | Products can be added, updated, or deleted by an admin. Each product includes a price, description, and image. |
 | FR_5 | Checkout and Orders | Users can place orders. Orders are stored with user details. |
+| FR_6 | Men | Users will be able to search for a variety of men's products. |
+| FR_7 | Women | Users will be able to search for a variety of women's products. |
 
 ---
 
 ### Non-Functional Requirements
 
-- Performance
-  - The system should load in under 5 seconds.
-
-- Scalability
-  - The amount of items can increase in the database
-  - It should support an increasing numbers of Users
-
-- Availability
-  - Should always be available to access and maintain a 90% uptime, ensuring it is always accessible to users.
-
-- Security
-  - Protect sensitive data, and be able to protect the database
-  - Should keep user information safe
+| ID | Identity | Description |
+| ----------- | ----------- | ------|
+| NFR_0 | Loading Time & Performance | The pages on the website should be able to load in 2 seconds when the total number of simultaneous users is less than 6 thousand. |
+| NFR_1 | Scalability | The amount of items can increase in the database. Can support an increasing numbers of Users |
+| NFR_2 | Availability | Should always be available to access and maintain a 90% uptime, ensuring it is always accessible to users. |
+| NFR_3 | Security | Protect sensitive data, and be able to protect the database. Should keep user information safe |
+| NFR_4 | Region Accessibility | The website should be made available in US, UN, and Canadian regions to ensure a wide geographic accessibility. |
