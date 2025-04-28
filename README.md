@@ -116,3 +116,7 @@ http://127.0.0.1:5000/
 | NFR_2 | Availability | Should always be available to access and maintain a 90% uptime, ensuring it is always accessible to users. |
 | NFR_3 | Security | Protect sensitive data, and be able to protect the database. Should keep user information safe |
 | NFR_4 | Region Accessibility | The website should be made available in US, UN, and Canadian regions to ensure a wide geographic accessibility. |
+
+---
+![group_11_project_mapping](https://github.com/user-attachments/assets/668ee8a7-7b67-4c09-b1c9-cf6d3ca15fc6)
+
