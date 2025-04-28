@@ -48,7 +48,11 @@ Once the app is running, visit the site in your browser:
 http://127.0.0.1:5000/
 ```
 
----
+### Run Test Cases
+While under the same directory as the `app.py` file, go to the command line and type:
+```
+python3 -m unittest tests/test_cases.py -v
+```
 
 ## Application Flow
 
