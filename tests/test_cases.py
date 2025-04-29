@@ -87,6 +87,24 @@ class WebTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'No results found', response.data)
 
+    def test_cart_page(self):
+        """ TC_013: View the cart page """
+        response = self.client.get('/shopping-cart')
+        self.assertEqual(response.status_code, 200)
+
+    ''' TO-DO '''
+    def test_adding_to_cart(self):
+        """ TC_014: Add a new item to shopping cart """
+        with self.client as c:
+            response = c.post('/add_to_cart', data={'item_id': '000001'})
+            self.assertEqual(response.status_code, 302)
+
+            # In session cart, first item in cart is == item added
+            with c.session_transaction() as session:
+                self.assertEqual(len(session['shopping_cart']), 1)
+                self.assertEqual(session['shopping_cart'][0]['id'], '000001')
+                self.assertEqual(session['shopping_cart'][0]['quantity'], 1)
+
     def test_admin_login_page(self):
         """ TC_017: Login page loads successfully """
         response = self.client.get('/admin/login')
@@ -119,6 +137,70 @@ class WebTestCases(unittest.TestCase):
         })
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Invalid credentials', response.data)
+
+    def test_admin_dashboard_unauthorized(self):
+        """ TC_021: Unauthorized users can't access admin page """
+        response = self.client.get('/admin')
+        self.assertEqual(response.status_code, 302)
+
+    def test_admin_add_item(self):
+        """ TC_023: Add a new item through the admin dashboard """
+        with self.client as c:
+            c.post('/admin/login', data={
+                'username': 'admin', 
+                'password': 'Group11'
+            })
+
+            # Action --> Form info
+            response = c.post('/admin', data={
+                'action': 'add',
+                'name': 'Checker Overalls',
+                'category': 'Women',
+                'subcategory': 'Clothing',
+                'price': 39.99,
+                'image': 'checker_overalls.jpg',
+                'colors': 'Black'
+            }, follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+
+            # Check if item in database correctly
+            self.cursor.execute("SELECT * FROM items WHERE name='Checker Overalls'")
+            item = self.cursor.fetchone()
+            self.assertEqual(item[1], 'Checker Overalls')
+            self.assertEqual(item[2], 'Women')
+            self.assertEqual(item[3], 'Clothing')
+            self.assertEqual(item[4], 39.99)
+            self.assertEqual(item[5], 'checker_overalls.jpg')
+            self.assertEqual(item[6], 'Black')
+
+    def test_admin_delete_item(self):
+        """ TC_025: Delete an item through the admin dashboard """
+        with self.client as c:
+            c.post('/admin/login', data={
+                'username':'admin', 
+                'password':'Group11'
+            })
+
+            # Action --> Form info
+            response = c.post('/admin', data={
+                'action': 'delete',
+                'id': '000021'
+            }, follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+
+    def test_admin_logout(self):
+        """ TC_026: Logout out of the admin session """
+        with self.client as c:
+            c.post('/admin/login', data={
+                'username':'admin', 
+                'password':'Group11'
+            })
+
+            with c.session_transaction() as session:
+                self.assertTrue(session.get('admin'))
+
+            response = c.get('/admin/logout', follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()
