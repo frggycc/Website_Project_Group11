@@ -138,6 +138,46 @@ class WebTestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Invalid credentials', response.data)
 
+    def test_add_item_to_cart(self):
+        """ TC_013: Add item to shopping cart and check if stored in session """
+        with self.client as client:
+            with client.session_transaction() as sess:
+                sess['shopping_cart'] = []  # Empty cart
+
+            client.post('/add_to_cart', data={'item_id': '000001'}, follow_redirects=True)
+
+        with client.session_transaction() as sess:
+            self.assertIn('shopping_cart', sess)
+            self.assertEqual(len(sess['shopping_cart']), 1)
+            self.assertEqual(sess['shopping_cart'][0]['id'], '000001')
+            self.assertEqual(sess['shopping_cart'][0]['quantity'], 1)
+
+    def test_add_same_item_twice_to_cart(self):
+        """ TC_014: Add the same item twice and check quantity increments """
+        with self.client as client:
+            with client.session_transaction() as sess:
+                sess['shopping_cart'] = []
+
+        client.post('/add_to_cart', data={'item_id': '000001'}, follow_redirects=True)
+        client.post('/add_to_cart', data={'item_id': '000001'}, follow_redirects=True)
+
+        with client.session_transaction() as sess:
+            self.assertEqual(len(sess['shopping_cart']), 1)
+            self.assertEqual(sess['shopping_cart'][0]['id'], '000001')
+            self.assertEqual(sess['shopping_cart'][0]['quantity'], 2)
+
+    def test_shopping_cart_page(self):
+        """ TC_015: Shopping cart page loads and displays added items correctly """
+        with self.client as client:
+            with client.session_transaction() as sess:
+                sess['shopping_cart'] = [{'id': '000001', 'quantity': 2}]
+
+        response = client.get('/shopping-cart')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Checkered Overalls', response.data)  
+        self.assertIn(b'2', response.data)  
+
+
     def test_admin_dashboard_unauthorized(self):
         """ TC_021: Unauthorized users can't access admin page """
         response = self.client.get('/admin')
