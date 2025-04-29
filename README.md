@@ -53,6 +53,12 @@ While under the same directory as the `app.py` file, go to the command line and 
 ```
 python3 -m unittest tests/test_cases.py -v
 ```
+And to see coverage as well as the report and the html report version
+```
+coverage run -m unittest tests/test_cases.py
+coverage report
+coverage html
+```
 
 ## Application Flow
 
