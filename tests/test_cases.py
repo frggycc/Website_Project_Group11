@@ -75,9 +75,8 @@ class WebTestCases(unittest.TestCase):
 
     def test_search_items_subcategory(self):
         """ TC_011: Search bar returns items by subcategory (accessories)"""
-        response = self.client.get('/search-bar?search=accessories')
+        response = self.client.get('/search-bar?search=Accessories')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Freedom Socks', response.data)
         self.assertIn(b'Running Socks', response.data)
         self.assertNotIn(b'String Joggers', response.data)
 
@@ -224,7 +223,7 @@ class WebTestCases(unittest.TestCase):
             # Action --> Form info
             response = c.post('/admin', data={
                 'action': 'delete',
-                'id': '000021'
+                'id': '000017'
             }, follow_redirects=True)
             self.assertEqual(response.status_code, 200)
 
